@@ -1,6 +1,7 @@
 package com.example;
 
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.collection.IsIterableWithSize.iterableWithSize;
 import static org.junit.Assert.assertThat;
 
 import java.net.URL;
@@ -15,9 +16,11 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.example.model.CustomerList;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class HelloControllerIT {
+public class CustomerIT {
 
 	@LocalServerPort
 	private int port;
@@ -29,13 +32,13 @@ public class HelloControllerIT {
 
 	@Before
 	public void setUp() throws Exception {
-		this.base = new URL("http://localhost:" + port + "/");
+		this.base = new URL("http://localhost:" + port + "/customers");
 	}
 
 	@Test
-	public void getHello() throws Exception {
-		ResponseEntity<String> response = template.getForEntity(base.toString(), String.class);
-		assertThat(response.getBody(), equalTo("Greetings from Spring Boot!"));
+	public void getCustomers() throws Exception {
+		ResponseEntity<CustomerList> response = template.getForEntity(base.toString(), CustomerList.class);
+		assertThat(response.getBody().getCustomers(), iterableWithSize(equalTo(0)));
 	}
 
 }
