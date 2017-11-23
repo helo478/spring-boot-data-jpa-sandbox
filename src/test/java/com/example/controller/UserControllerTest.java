@@ -19,20 +19,20 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import com.example.model.Customer;
-import com.example.service.CustomerService;
+import com.example.model.User;
+import com.example.service.UserService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class CustomerControllerTest {
+public class UserControllerTest {
 
 	@Autowired
 	@InjectMocks
 	private MockMvc mvc;
 
 	@Mock
-	private CustomerService mockCustomerService;
+	private UserService mockCustomerService;
 
 	@Before
 	public void setUpMocks() {
@@ -42,11 +42,11 @@ public class CustomerControllerTest {
 	@Test
 	public void getCustomers() throws Exception {
 
-		final Customer customer = new Customer();
+		final User customer = new User();
 
-		Mockito.when(mockCustomerService.createCustomer(customer)).thenReturn(customer);
+		Mockito.when(mockCustomerService.createUser(customer)).thenReturn(customer);
 
-		mvc.perform(MockMvcRequestBuilders.get("/customers").accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
+		mvc.perform(MockMvcRequestBuilders.get("/users").accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
 	}
 
 }
