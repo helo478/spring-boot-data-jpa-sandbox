@@ -23,7 +23,6 @@ public class UserController {
 
 	@GetMapping()
 	public UserList getUsers() {
-
 		return userService.readUsers();
 	}
 
@@ -41,7 +40,7 @@ public class UserController {
 	public void putUser(final @PathVariable("guid") String guid, final @RequestBody User user) {
 		userService.updateUser(guid, user);
 	}
-	
+
 	@DeleteMapping("/{guid}")
 	public boolean deleteUser(final @PathVariable("guid") String guid) {
 		return userService.deleteUser(guid);

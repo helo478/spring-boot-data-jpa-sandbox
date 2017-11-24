@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -19,6 +21,10 @@ public class User {
 	@Column(nullable = false, updatable = false)
 	private String guid;
 	
+	@ManyToOne
+	@JoinColumn(name = "status", nullable = false, updatable = false)
+	private Status status;
+	
 	private String description;
 
 	public User() {
@@ -30,7 +36,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return String.format("User[id='%d', guid='%s', lastName='%s']", id, guid);
+		return String.format("User[id='%d', guid='%s', description='%s']", id, guid, description);
 	}
 
 	@Override
@@ -59,6 +65,14 @@ public class User {
 
 	public void setGuid(final String guid) {
 		this.guid = guid;
+	}
+
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(final Status status) {
+		this.status = status;
 	}
 
 	public String getDescription() {

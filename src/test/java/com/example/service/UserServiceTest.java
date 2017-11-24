@@ -54,7 +54,7 @@ public class UserServiceTest {
 	}
 
 	@Test(expected = NotFoundException.class)
-	public void updateUser_forANonExistantUser_shouldThrowNotFound() {
+	public void updateUser_nonExistantUser_shouldThrowNotFound() {
 
 		final User arbitraryUser = new User();
 		sut.updateUser(TEST_GUID, arbitraryUser);
